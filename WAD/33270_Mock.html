@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables</title>
+    <style>
+        table,th,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="text" id="input1">Table 1</input>
+        <input type="text" id="input2">Table 2</input>
+        <button type="submit" onclick="mult()">Submit</button>
+    </div>
+   <div>
+       <div>
+        <table id="table1">
+
+        </table>
+       </div>
+       <div>
+        <table id="table2">
+
+        </table>
+       </div>
+       <div>
+            <table id="table3"></table>
+
+       </div>
+   </div>
+   <script>
+        function mult(){
+            var in1=document.getElementById("input1").value;
+            var in2=document.getElementById("input2").value;
+            let tab1=document.getElementById("table1");
+            let tab2=document.getElementById("table2");
+            let tab3=document.getElementById("table3");
+            var nr1=parseInt(in1[0]);
+            var nc1=parseInt(in1[2]);
+            var nv1=parseInt(in1[4]);
+            var nr2=parseInt(in2[0]);
+            var nc2=parseInt(in2[2]);
+            var nv2=parseInt(in2[4]);
+            // for(var i=0;i<nr1;i++){
+            //     let x=nv1*(i+1);
+            //     var row=tab1.insertRow(i);
+            //     for(var j=0;j<nc1;j++){
+            //         var cell=row.insertCell(j);
+            //         cell.innerHTML=x;
+            //         x++;
+            //     }
+            // }
+            for(var i=0;i<nr1;i++){
+                var row=tab1.insertRow(i);
+            }
+            for(var i=0;i<nc1;i++){
+                let x1=nv1;
+                for(var j=0;j<nr1;j++){
+                    var row=tab1.rows[j];
+                    var cell=row.insertCell(i);
+                    cell.innerHTML=x1;
+                    x1=x1+nv1;
+                }
+                nv1++;
+            }
+
+            for(var i=0;i<nr2;i++){
+                var row=tab2.insertRow(i);
+            }
+            for(var i=0;i<nc2;i++){
+                let x2=nv2;
+                for(var j=0;j<nr2;j++){
+                    var row=tab2.rows[j];
+                    var cell=row.insertCell(i);
+                    cell.innerHTML=x2;
+                    x2=x2+nv2;
+                }
+                nv2++;
+            }
+
+            if(nr1===nr2 && nc1===nc2){
+                nv1=nv1-(nc1);
+                nv2=nv2-(nc2);
+                console.log(nv1+nv2);
+                if(nv1==nv2){
+                    for(var i=0;i<nr1;i++){
+                        var row=tab3.insertRow(i);
+                    }
+                    for(var i=0;i<nc1;i++){
+                        let x1=nv1;
+                        for(var j=0;j<nr1;j++){
+                            var row=tab1.rows[j];
+                            var cell=row.insertCell(i);
+                            cell.innerHTML=x1;
+                            x1=x1+nv1;
+                        }
+                        nv1++;
+                    }
+                }
+                else{
+                    for(var i=0;i<nr1;i++){
+                        var row=tab3.insertRow(i);
+                        for(var j=0;j<nc1;j++){
+                            var cell=row.insertCell(j);
+                            console.log(tab1.rows[i].cells[j].innerHTML);
+                            cell.innerHTML=tab1.rows[i].cells[j].innerHTML*tab2.rows[i].cells[j].innerHTML;
+                        }
+                    }
+                }
+            }
+
+       }
+   </script>
+
+</body>
+</html>
